@@ -1,3 +1,6 @@
+## Management System
+본 프로젝트는 나동빈님의 React-고객관리시스템 프로젝트를 클론코딩한 것입니다. 
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
