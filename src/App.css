@@ -1,3 +1,7 @@
 .gray-background {
   background: darkgray;
 }
+
+.table {
+  border-spacing: 0;
+  border: 1px solid black;
