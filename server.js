@@ -1,35 +1,29 @@
+const fs = require('fs');
 const express = require('express');
 const app = express();
 const port = process.env.PORT || 5000;
 
+const data = fs.readFileSync('./database.json');
+const conf = JSON.parse(data);
+const mysql = require('mysql');
+
+const connection = mysql.createConnection({
+  host: conf.host,
+  user: conf.user,
+  password: conf.password,
+  port: conf.port,
+  database: conf.database,
+  ssl: true
+})
+connection.connect();
+
 
 app.get('/api/customers', (req, res) => {
-    res.send([
-        {
-        id : 1,
-        image : 'https://placeimg.com/64/64/1',
-        name: '유연아',
-        birthday: '981127',
-        gender: '여자',
-        job: '깐부'
-        },
-        {
-        id : 2,
-        image : 'https://placeimg.com/64/64/2',
-        name: '조지훈',
-        birthday: '980404',
-        gender: '남자',
-        job: '깐부'
-        },
-        {
-          id : 3,
-          image : 'https://placeimg.com/64/64/3',
-          name: '금쪽이',
-          birthday: '200910',
-          gender: '천사',
-          job: '깐풍기'
-        }
-      ]
+    connection.query(
+      "SELECT * FROM management.customer",
+      (err, rows, fields) => {
+          res.send(rows);
+      }
     );
 })
 
