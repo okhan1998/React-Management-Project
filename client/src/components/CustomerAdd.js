@@ -31,10 +31,12 @@ class CustomerAdd extends React.Component {
 
     handleFormSubmit = (e) => {
         e.preventDefault()
-        this.addCustomer()
-            .then((response) => {
-                console.log(response.data);
-            })
+        this.props.stateRefresh();
+        this.addCustomer().then((response) => {
+            this.props.stateRefresh();
+            }).catch((error) => {
+                this.props.stateRefresh();
+            });
         this.setState({
             file: null,
             userName: '',
@@ -43,7 +45,7 @@ class CustomerAdd extends React.Component {
             job: '',
             fileName: ''
         })
-        // window.location.reload();
+
     }
     
     handleFileChange = (e) => {
